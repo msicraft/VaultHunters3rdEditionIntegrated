@@ -4,6 +4,7 @@ import me.msicraft.vaulthuntersintegrated.aCommon.PlayerData.File.PlayerDataFile
 import me.msicraft.vaulthuntersintegrated.aCommon.SpellAbility.PlayerSpellAbility;
 import me.msicraft.vaulthuntersintegrated.aCommon.SpellAbility.PlayerStats;
 import me.msicraft.vaulthuntersintegrated.aCommon.SpellAbility.SpellAbility;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ public class PlayerData {
     private int killPoint;
     private double killPointExp;
 
+    private Location lastDeathLocation;
+
     public PlayerData(Player player) {
         this.player = player;
         playerDataFile = new PlayerDataFile(player);
@@ -26,6 +29,7 @@ public class PlayerData {
         playerStats = new PlayerStats(player, playerDataFile);
         killPoint = playerDataFile.getConfig().contains("KillPoint.Point") ? playerDataFile.getConfig().getInt("KillPoint.Point") : 0;
         killPointExp = playerDataFile.getConfig().contains("KillPoint.Exp") ? playerDataFile.getConfig().getDouble("KillPoint.Exp") : 0;
+        lastDeathLocation = playerDataFile.getConfig().contains("LastDeathLocation") ? playerDataFile.getConfig().getLocation("LastDeathLocation") : null;
     }
 
     public void savePlayerData() {
@@ -33,6 +37,7 @@ public class PlayerData {
         if (playerDataFile != null) {
             playerDataFile.getConfig().set("KillPoint.Point", this.killPoint);
             playerDataFile.getConfig().set("KillPoint.Exp", this.killPointExp);
+            playerDataFile.getConfig().set("LastDeathLocation", this.lastDeathLocation);
             playerDataFile.saveConfig();
             saveSpellAbility();
             savePlayerStats();
@@ -96,5 +101,13 @@ public class PlayerData {
 
     public void setKillPointExp(double killPointExp) {
         this.killPointExp = killPointExp;
+    }
+
+    public Location getLastDeathLocation() {
+        return lastDeathLocation;
+    }
+
+    public void setLastDeathLocation(Location location) {
+        this.lastDeathLocation = location;
     }
 }

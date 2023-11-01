@@ -8,15 +8,19 @@ import java.util.List;
 
 public enum SpellAbility {
 
-    SELF_HEAL("Spell.SelfHeal", "SelfHeal" ,"힐", false, null,
+    MAGIC_MISSILE("MagicMissile", "매직 미사일", true, "MagicMissile",
             1, 9999, 0, 0, 9999, 9999),
-    DOT_HEAL("Spell.DotHeal", "DotHeal", "도트 힐", false, null,
+    SELF_HEAL("SelfHeal" ,"힐", false, null,
             1, 9999, 0, 0, 9999, 9999),
-    RANGE_HEAL("Spell.RangeHeal", "RangeHeal", "범위 힐", false, null,
+    DOT_HEAL("DotHeal", "도트 힐", false, null,
             1, 9999, 0, 0, 9999, 9999),
-    RANGE_DOT_HEAL("Spell.RangeDotHeal", "RangeDotHeal", "범위 도트 힐", false, null,
+    RANGE_HEAL("RangeHeal", "범위 힐", false, null,
             1, 9999, 0, 0, 9999, 9999),
-    ATTACK_AURA("Spell.AttackAura", "AttackAura", "공격 오라", false, null,
+    RANGE_DOT_HEAL("RangeDotHeal", "범위 도트 힐", false, null,
+            1, 9999, 0, 0, 9999, 9999),
+    ATTACK_AURA("AttackAura", "공격 오라", false, null,
+            1, 9999, 0, 0, 9999, 9999),
+    ARMOR_AURA("ArmorAura", "방어 오라", false, null,
             1, 9999, 0, 0, 9999, 9999)
     ;
 
@@ -32,8 +36,7 @@ public enum SpellAbility {
     private int requiredKillPoint;
     private double mana;
 
-    SpellAbility(String path, String key, String displayName, boolean isMythicSkill, String mythicSkillInternalName, int maxLevel, double coolDown, double value, double levelPerValue, int requiredKillPoint, double mana) {
-        this.path = path;
+    SpellAbility(String key, String displayName, boolean isMythicSkill, String mythicSkillInternalName, int maxLevel, double coolDown, double value, double levelPerValue, int requiredKillPoint, double mana) {
         this.key = key;
         this.displayName = displayName;
         this.isMythicSkill = isMythicSkill;
@@ -44,6 +47,7 @@ public enum SpellAbility {
         this.levelPerValue = levelPerValue;
         this.requiredKillPoint = requiredKillPoint;
         this.mana = mana;
+        this.path = "Spell." + key;
     }
 
     public String getPath() {

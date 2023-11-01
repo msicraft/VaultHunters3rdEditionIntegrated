@@ -29,7 +29,7 @@ public class PlayerSpellAbility {
         bindSpellAbility(playerDataFile);
         setPurchasedSpellAbilityMap(playerDataFile);
         new DisplaySpellAbilityTask(player).runTaskTimer(VaultHuntersIntegrated.getPlugin(), 0L, 10L);
-        new BuffDurationTask(player).runTaskTimer(VaultHuntersIntegrated.getPlugin(), 0L, 10L);
+        new BuffDurationTask(player).runTaskTimer(VaultHuntersIntegrated.getPlugin(), 0L, 20L);
     }
 
     private void bindSpellAbility(PlayerDataFile playerDataFile) {
@@ -136,7 +136,7 @@ public class PlayerSpellAbility {
         return buffMap.containsKey(spellAbility);
     }
 
-    public void addBuff(SpellAbility spellAbility, double seconds) {
+    public void addBuff(SpellAbility spellAbility, int seconds) {
         buffMap.put(spellAbility, new Buff(spellAbility, seconds));
     }
 

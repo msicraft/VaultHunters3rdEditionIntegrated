@@ -112,6 +112,7 @@ public final class VaultHuntersIntegrated extends JavaPlugin {
         for (Player player : getServer().getOnlinePlayers()) {
             PlayerDataUtil.unregisterPlayerData(player);
         }
+        GlowUtil.unregister();
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + getPrefix() + ChatColor.RED +" Plugin Disable");
     }
 
@@ -137,7 +138,7 @@ public final class VaultHuntersIntegrated extends JavaPlugin {
     public void reloadDataFiles() {
         reloadConfig();
         spellAbilityDataFile.reloadConfig();
-        SpellAbilityUtil.update();
+        SpellAbilityUtil.reloadVariables();
         KillPointUtil.reloadVariables();
         PlayerKillPointRelatedEvent.reloadVariables();
         PlayerRelatedEvent.reloadVariables();

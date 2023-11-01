@@ -1,6 +1,7 @@
 package me.msicraft.vaulthuntersintegrated.aCommon.KillPoint;
 
 import me.msicraft.vaulthuntersintegrated.VaultHuntersIntegrated;
+import me.msicraft.vaulthuntersintegrated.aCommon.PlayerData.PlayerDataUtil;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
@@ -97,6 +98,16 @@ public class KillPointShopUtil {
         if (location != null) {
             player.teleport(location);
             player.sendMessage(ChatColor.GREEN + "스폰 지점으로 이동 되었습니다.");
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean backLastDeathLocation(Player player) {
+        Location location = PlayerDataUtil.getPlayerData(player).getLastDeathLocation();
+        if (location != null) {
+            player.teleport(location);
+            player.sendMessage(ChatColor.GREEN + "죽은 위치로 이동 되었습니다.");
             return true;
         }
         return false;

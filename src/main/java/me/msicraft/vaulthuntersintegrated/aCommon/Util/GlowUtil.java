@@ -45,9 +45,11 @@ public class GlowUtil {
     public static void register() {
         if (SCOREBOARD != null) {
             for (GlowTeam glowTeam : GlowTeam.values()) {
-                Team team = SCOREBOARD.registerNewTeam(glowTeam.getName());
-                team.setColor(glowTeam.getColor());
-                team.setPrefix(ChatColor.WHITE + "");
+                if (SCOREBOARD.getTeam(glowTeam.getName()) == null) {
+                    Team team = SCOREBOARD.registerNewTeam(glowTeam.getName());
+                    team.setColor(glowTeam.getColor());
+                    team.setPrefix(ChatColor.WHITE + "");
+                }
             }
         }
     }

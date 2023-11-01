@@ -1,9 +1,12 @@
 package me.msicraft.vaulthuntersintegrated.Event;
 
 import me.msicraft.vaulthuntersintegrated.VaultHuntersIntegrated;
+import me.msicraft.vaulthuntersintegrated.aCommon.PlayerData.PlayerDataUtil;
 import me.msicraft.vaulthuntersintegrated.aCommon.Util.EntityUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -12,6 +15,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.vehicle.VehicleEnterEvent;
@@ -29,6 +33,7 @@ public class PlayerRelatedEvent implements Listener {
     private static final List<EntityDamageEvent.DamageCause> disableDamageCauses = new ArrayList<>();
     private static boolean useInventoryTotem = false;
     private static int totemInvulnerableTick = 1;
+    private static boolean disableTeleportInVault = false;
 
     public static void reloadVariables() {
         disableMount = VaultHuntersIntegrated.getPlugin().getConfig().contains("Setting.Disable-Mount") && VaultHuntersIntegrated.getPlugin().getConfig().getBoolean("Setting.Disable-Mount");
@@ -46,6 +51,7 @@ public class PlayerRelatedEvent implements Listener {
         }
         useInventoryTotem = VaultHuntersIntegrated.getPlugin().getConfig().contains("Setting.UseInventoryTotem.Enabled") && VaultHuntersIntegrated.getPlugin().getConfig().getBoolean("Setting.UseInventoryTotem.Enabled");
         totemInvulnerableTick = VaultHuntersIntegrated.getPlugin().getConfig().contains("Setting.UseInventoryTotem.InvulnerableTick") ? VaultHuntersIntegrated.getPlugin().getConfig().getInt("Setting.UseInventoryTotem.InvulnerableTick") : 1;
+        disableTeleportInVault = VaultHuntersIntegrated.getPlugin().getConfig().contains("KillPointShop.BackDeathLocation.DisableTeleportInVault") && VaultHuntersIntegrated.getPlugin().getConfig().getBoolean("KillPointShop.BackDeathLocation.DisableTeleportInVault");
     }
 
     @EventHandler
@@ -113,6 +119,23 @@ public class PlayerRelatedEvent implements Listener {
                     }
                 }
             }
+        }
+    }
+
+    @EventHandler(ignoreCancelled = true)
+    public void onSaveDeathLocation(EntityDeathEvent e) {
+        LivingEntity livingEntity = e.getEntity();
+        if (livingEntity instanceof Player player) {
+            Location location = player.getLocation();
+            if (disableTeleportInVault) {
+                World world = location.getWorld();
+                if (world != null) {
+                    if (world.getKey().getNamespace().equals("the_vault")) {
+                        return;
+                    }
+                }
+            }
+            PlayerDataUtil.getPlayerData(player).setLastDeathLocation(location);
         }
     }
 

@@ -85,3 +85,38 @@ Spell:
       - '&f필요 마나: &3<mana>'
       - '&f최대 레밸: &a<max_level>'
       - '&f레벨당 필요 킬 포인트: &a<required_killpoint>'
+  MagicMissile:
+    DisplayName: "매직 미사일"
+    MythicSkill: "MagicMissile"
+    CoolDown: 6
+    Value: 50
+    MaxLevel: 4
+    LevelPerValue: 5
+    RequiredKillPoint: 5
+    Mana: 5
+    Lore:
+      - '&f시전시 바라보는 방향으로 공격 데미지의 &a<value>%&f 의 매직 미사일을 발사한다'
+      - ''
+      - '&f레벨당 &a<level_per_value>%&f 데미지 상승'
+      - '&f쿨타임: &a<cooldown> s'
+      - '&f필요 마나: &3<mana>'
+      - '&f최대 레밸: &a<max_level>'
+      - '&f레벨당 필요 킬 포인트: &a<required_killpoint>'
+  ArmorAura:
+    DisplayName: "방어 오라"
+    MythicSkill:
+    CoolDown: 20
+    Value: 10
+    MaxLevel: 4
+    LevelPerValue: 5
+    RequiredKillPoint: 6
+    Mana: 12
+    Lore:
+      - '&f시전시 5초간 유지되는 버프 부여,'
+      - '&f버프가 유지되는 동안 받는 데미지 &a<value>%&f 감소'
+      - ''
+      - '&f레벨당 &a<level_per_value>%&f 받는 데미지 감소'
+      - '&f쿨타임: &a<cooldown> s'
+      - '&f필요 마나: &3<mana>'
+      - '&f최대 레밸: &a<max_level>'
+      - '&f레벨당 필요 킬 포인트: &a<required_killpoint>'

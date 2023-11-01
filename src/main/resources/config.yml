@@ -61,5 +61,16 @@ KillPointShop:
       - '&e필요 킬 포인트: &7 <requiredKillPoint>'
       - ''
       - '&f스폰 지점으로 이동'
+  BackDeathLocation:
+    Enabled: true
+    Required-KillPoint: 1
+    Material: Skeleton_skull
+    DisableTeleportInVault: true
+    Name: '&f마지막으로 죽은 위치로 이동'
+    Lore:
+      - '&e필요 킬 포인트: &7 <requiredKillPoint>'
+      - ''
+      - '&f마지막으로 죽은 위치로 이동'
+      - '&c금고로는 이동 불가'
 
 SpawnLocation:

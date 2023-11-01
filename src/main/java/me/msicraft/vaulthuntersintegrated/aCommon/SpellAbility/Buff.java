@@ -4,10 +4,10 @@ public class Buff {
 
     private final SpellAbility spellAbility;
     private String buffName;
-    private final double seconds;
+    private final int seconds;
     private final long endTime;
 
-    public Buff(SpellAbility spellAbility, double seconds) {
+    public Buff(SpellAbility spellAbility, int seconds) {
         this.spellAbility = spellAbility;
         this.buffName = spellAbility.getDisplayName();
         if (buffName == null) {
@@ -29,7 +29,7 @@ public class Buff {
         this.buffName = buffName;
     }
 
-    public double getSeconds() {
+    public int getSeconds() {
         return seconds;
     }
 

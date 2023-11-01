@@ -15,6 +15,13 @@ import java.util.Map;
 
 public class SpellAbilityUtil {
 
+    public static boolean isEnabled = false;
+
+    public static void reloadVariables() {
+        isEnabled = VaultHuntersIntegrated.getPlugin().getConfig().contains("SpellAbility.Enabled") && VaultHuntersIntegrated.getPlugin().getConfig().getBoolean("SpellAbility.Enabled");
+        update();
+    }
+
     private static final Map<String, SpellAbility> spellAbilityMap = new HashMap<>(); //spellNameKey, spellAbility
 
     public static void initialize() {
@@ -24,7 +31,7 @@ public class SpellAbilityUtil {
         }
     }
 
-    public static void update() {
+    private static void update() {
         for (String s : spellAbilityMap.keySet()) {
             SpellAbility spellAbility = spellAbilityMap.get(s);
             updateSpellAbility(spellAbility);
@@ -64,15 +71,18 @@ public class SpellAbilityUtil {
     }
 
     public static void castSpell(Player player, SpellAbility spellAbility) {
+        PlayerSpellAbility playerSpellAbility = PlayerDataUtil.getPlayerData(player).getPlayerSpellAbility();
+        int level = playerSpellAbility.getSpellAbilityLevel(spellAbility);
+        if (level == 0) {
+            return;
+        }
+        level = level - 1;
         if (spellAbility.isMythicSkill()) {
-            MythicBukkit.inst().getAPIHelper().castSkill(player, spellAbility.getMythicSkillInternalName());
+            float power = 1;
+            double levelPerValue = spellAbility.getLevelPerValue() / 100.0;
+            power = (float) (power + (levelPerValue * level));
+            MythicBukkit.inst().getAPIHelper().castSkill(player, spellAbility.getMythicSkillInternalName(), power);
         } else {
-            PlayerSpellAbility playerSpellAbility = PlayerDataUtil.getPlayerData(player).getPlayerSpellAbility();
-            int level = playerSpellAbility.getSpellAbilityLevel(spellAbility);
-            if (level == 0) {
-                return;
-            }
-            level = level - 1;
             double value = spellAbility.getValue();
             double levelPerValue = spellAbility.getLevelPerValue();
             double calValue = value + (levelPerValue * level);
@@ -92,6 +102,7 @@ public class SpellAbilityUtil {
                     }
                 }
                 case ATTACK_AURA -> playerSpellAbility.addBuff(spellAbility, 5);
+                case ARMOR_AURA -> playerSpellAbility.addBuff(spellAbility, 5);
             }
         }
     }

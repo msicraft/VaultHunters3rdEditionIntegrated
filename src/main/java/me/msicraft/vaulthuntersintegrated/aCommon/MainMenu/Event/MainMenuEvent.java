@@ -61,7 +61,7 @@ public class MainMenuEvent implements Listener {
                                 mainGui.setKillPointShop(player);
                             }
                             case "SpellAbilityManagement" -> {
-                                if (VaultHuntersIntegrated.getPlugin().getConfig().getBoolean("SpellAbility.Enabled")) {
+                                if (SpellAbilityUtil.isEnabled) {
                                     player.openInventory(mainGui.getInventory());
                                     mainGui.setSpellAbilityManagement(player);
                                 } else {
@@ -69,8 +69,12 @@ public class MainMenuEvent implements Listener {
                                 }
                             }
                             case "PlayerStatsManagement" -> {
-                                player.openInventory(mainGui.getInventory());
-                                mainGui.setPlayerStatsManagement(player);
+                                if (SpellAbilityUtil.isEnabled) {
+                                    player.openInventory(mainGui.getInventory());
+                                    mainGui.setPlayerStatsManagement(player);
+                                } else {
+                                    player.sendMessage(ChatColor.RED + "현재 사용 불가능 합니다.");
+                                }
                             }
                         }
                     }
@@ -85,6 +89,15 @@ public class MainMenuEvent implements Listener {
                                         sendKillPointMessage(player, requiredKillPoint, true);
                                     } else {
                                         player.sendMessage(ChatColor.RED + "스폰 위치가 없습니다.");
+                                    }
+                                } else {
+                                    player.sendMessage(ChatColor.RED + "충분한 킬 포인트를 가지고 있지 않습니다.");
+                                }
+                            }
+                            case "BackDeathLocation" -> {
+                                if (KillPointUtil.hasEnoughKillPoint(player, requiredKillPoint)) {
+                                    if (KillPointShopUtil.backLastDeathLocation(player)) {
+                                        sendKillPointMessage(player, requiredKillPoint, true);
                                     }
                                 } else {
                                     player.sendMessage(ChatColor.RED + "충분한 킬 포인트를 가지고 있지 않습니다.");
