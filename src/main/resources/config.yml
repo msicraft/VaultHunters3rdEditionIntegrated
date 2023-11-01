@@ -1,0 +1,65 @@
+config-version: 1
+Debug: false
+
+NoDamageTickDamageCause: #ignore list
+  - FIRE
+  - HOT_FLOOR
+  - LAVA
+  - STARVATION
+  - SUFFOCATION
+  - VOID
+  - WITHER
+  - POISON
+  - CONTACT
+
+Setting:
+  Disable-Mount: false
+  Disable-BoneMeal: false
+  NoDamageTick:
+    UseDamageCause: true
+    Tick: 10
+  Breeding:
+    Percent: 0.1
+  UseInventoryTotem:
+    Enabled: false
+    InvulnerableTick: 60
+  Glowing:
+    Enabled: false
+    Color: "GREEN"
+
+KillPointSetting:
+  Enabled: true
+  DistributionKillPointExp: true
+  DistributionDistance: 30
+  Fix-DeathEvent: false
+  Required-Exp: 1000
+  PerEntity-MaxExpValue: 2000
+  KillPointExpEquations: '((H*0.25)+(D*2)+(A*1.25)+(AT*1.75))'
+  KillPointExpSpread: 0.25
+  SpawnerEntityMulti: 1
+
+SpellAbility:
+  Enabled: false
+  CastingDelay: 0.5
+  MaxBindSize: 4
+  LevelPerMana: 2
+  LevelPerManaRegen: 0.05
+  MaxManaLevel: 10
+  MaxManaRegenLevel: 15
+  BaseMana: 20
+  RequiredManaKillPoint: 4
+  BaseManaRegeneration: 0.25
+  RequiredManaRegenKillPoint: 4
+
+KillPointShop:
+  MoveSpawn:
+    Enabled: true
+    Required-KillPoint: 1
+    Material: Compass
+    Name: 스폰 이동
+    Lore:
+      - '&e필요 킬 포인트: &7 <requiredKillPoint>'
+      - ''
+      - '&f스폰 지점으로 이동'
+
+SpawnLocation:

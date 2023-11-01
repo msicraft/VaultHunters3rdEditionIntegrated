@@ -1,0 +1,11 @@
+name: VaultHuntersIntegrated
+version: 1.0 #'${project.version}'
+main: me.msicraft.vaulthuntersintegrated.VaultHuntersIntegrated
+api-version: 1.18
+authors: [ msicraft ]
+description: Vault Hunters 3rd Edition modpack addon
+commands:
+  vaulthuntersintegrated:
+    description: main commands
+    aliases: [vhi, vaulthunters]
+    permission-message: You don't have permission

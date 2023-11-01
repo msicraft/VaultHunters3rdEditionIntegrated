@@ -1,0 +1,87 @@
+Spell:
+  SelfHeal:
+    DisplayName: "힐"
+    MythicSkill:
+    CoolDown: 8
+    Value: 2
+    MaxLevel: 3
+    LevelPerValue: 2
+    RequiredKillPoint: 3
+    Mana: 3
+    Lore:
+      - '&f시전시 체력을 &a<value>&f 만큼 회복'
+      - ''
+      - '&f레벨당 &a<level_per_value>&f 만큼의 회복량 증가'
+      - '&f쿨타임: &a<cooldown> s'
+      - '&f필요 마나: &3<mana>'
+      - '&f최대 레밸: &a<max_level>'
+      - '&f레벨당 필요 킬 포인트: &a<required_killpoint>'
+  DotHeal:
+    DisplayName: "도트 힐"
+    MythicSkill:
+    CoolDown: 25
+    Value: 10
+    MaxLevel: 1
+    LevelPerValue: 0
+    RequiredKillPoint: 9
+    Mana: 10
+    Lore:
+      - '&f시전시 10초에 걸처 &a<value>&f 만큼 회복'
+      - ''
+      - '&f레벨당 &a<level_per_value>&f 만큼의 회복량 증가'
+      - '&f쿨타임: &a<cooldown> s'
+      - '&f필요 마나: &3<mana>'
+      - '&f최대 레밸: &a<max_level>'
+      - '&f레벨당 필요 킬 포인트: &a<required_killpoint>'
+  RangeHeal:
+    DisplayName: "범위 힐"
+    MythicSkill:
+    CoolDown: 30
+    Value: 5
+    MaxLevel: 3
+    LevelPerValue: 5
+    RequiredKillPoint: 10
+    Mana: 15
+    Lore:
+      - '&f시전시 10칸내의 모든 플레이어의 체력을 &a<value>&f 만큼 회복'
+      - ''
+      - '&f레벨당 &a<level_per_value>&f 만큼의 회복량 증가'
+      - '&f쿨타임: &a<cooldown> s'
+      - '&f필요 마나: &3<mana>'
+      - '&f최대 레밸: &a<max_level>'
+      - '&f레벨당 필요 킬 포인트: &a<required_killpoint>'
+  RangeDotHeal:
+    DisplayName: "범위 도트 힐"
+    MythicSkill:
+    CoolDown: 50
+    Value: 20
+    MaxLevel: 1
+    LevelPerValue: 0
+    RequiredKillPoint: 15
+    Mana: 25
+    Lore:
+      - '&f시전시 10초에 걸처 10칸내의 모든 플레이어의 체력을 &a<value>&f 만큼 회복'
+      - ''
+      - '&f레벨당 &a<level_per_value>&f 만큼의 회복량 증가'
+      - '&f쿨타임: &a<cooldown> s'
+      - '&f필요 마나: &3<mana>'
+      - '&f최대 레밸: &a<max_level>'
+      - '&f레벨당 필요 킬 포인트: &a<required_killpoint>'
+  AttackAura:
+    DisplayName: "공격 오라"
+    MythicSkill:
+    CoolDown: 20
+    Value: 15
+    MaxLevel: 4
+    LevelPerValue: 5
+    RequiredKillPoint: 6
+    Mana: 10
+    Lore:
+      - '&f시전시 5초간 유지되는 버프 부여,'
+      - '&f버프가 유지되는 동안 데미지 &a<value>%&f 상승'
+      - ''
+      - '&f레벨당 &a<level_per_value>%&f 데미지 상승'
+      - '&f쿨타임: &a<cooldown> s'
+      - '&f필요 마나: &3<mana>'
+      - '&f최대 레밸: &a<max_level>'
+      - '&f레벨당 필요 킬 포인트: &a<required_killpoint>'
