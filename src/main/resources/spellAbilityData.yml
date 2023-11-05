@@ -2,33 +2,16 @@ Spell:
   SelfHeal:
     DisplayName: "힐"
     MythicSkill:
-    CoolDown: 8
-    Value: 2
-    MaxLevel: 3
-    LevelPerValue: 2
+    CoolDown: 9
+    Value: 4
+    MaxLevel: 5
+    LevelPerValue: 1
     RequiredKillPoint: 3
     Mana: 3
     Lore:
       - '&f시전시 체력을 &a<value>&f 만큼 회복'
       - ''
-      - '&f레벨당 &a<level_per_value>&f 만큼의 회복량 증가'
-      - '&f쿨타임: &a<cooldown> s'
-      - '&f필요 마나: &3<mana>'
-      - '&f최대 레밸: &a<max_level>'
-      - '&f레벨당 필요 킬 포인트: &a<required_killpoint>'
-  DotHeal:
-    DisplayName: "도트 힐"
-    MythicSkill:
-    CoolDown: 25
-    Value: 10
-    MaxLevel: 1
-    LevelPerValue: 0
-    RequiredKillPoint: 9
-    Mana: 10
-    Lore:
-      - '&f시전시 10초에 걸처 &a<value>&f 만큼 회복'
-      - ''
-      - '&f레벨당 &a<level_per_value>&f 만큼의 회복량 증가'
+      - '&f레벨당 &a+<level_per_value>'
       - '&f쿨타임: &a<cooldown> s'
       - '&f필요 마나: &3<mana>'
       - '&f최대 레밸: &a<max_level>'
@@ -36,33 +19,16 @@ Spell:
   RangeHeal:
     DisplayName: "범위 힐"
     MythicSkill:
-    CoolDown: 30
-    Value: 5
+    CoolDown: 25
+    Value: 8
     MaxLevel: 3
-    LevelPerValue: 5
+    LevelPerValue: 4
     RequiredKillPoint: 10
-    Mana: 15
+    Mana: 12
     Lore:
       - '&f시전시 10칸내의 모든 플레이어의 체력을 &a<value>&f 만큼 회복'
       - ''
-      - '&f레벨당 &a<level_per_value>&f 만큼의 회복량 증가'
-      - '&f쿨타임: &a<cooldown> s'
-      - '&f필요 마나: &3<mana>'
-      - '&f최대 레밸: &a<max_level>'
-      - '&f레벨당 필요 킬 포인트: &a<required_killpoint>'
-  RangeDotHeal:
-    DisplayName: "범위 도트 힐"
-    MythicSkill:
-    CoolDown: 50
-    Value: 20
-    MaxLevel: 1
-    LevelPerValue: 0
-    RequiredKillPoint: 15
-    Mana: 25
-    Lore:
-      - '&f시전시 10초에 걸처 10칸내의 모든 플레이어의 체력을 &a<value>&f 만큼 회복'
-      - ''
-      - '&f레벨당 &a<level_per_value>&f 만큼의 회복량 증가'
+      - '&f레벨당 &a+<level_per_value>'
       - '&f쿨타임: &a<cooldown> s'
       - '&f필요 마나: &3<mana>'
       - '&f최대 레밸: &a<max_level>'
@@ -70,17 +36,17 @@ Spell:
   AttackAura:
     DisplayName: "공격 오라"
     MythicSkill:
-    CoolDown: 20
-    Value: 15
+    CoolDown: 50
+    Value: 10
     MaxLevel: 4
     LevelPerValue: 5
-    RequiredKillPoint: 6
-    Mana: 10
+    RequiredKillPoint: 7
+    Mana: 15
     Lore:
-      - '&f시전시 5초간 유지되는 버프 부여,'
-      - '&f버프가 유지되는 동안 데미지 &a<value>%&f 상승'
+      - '&f시전시 25초간 유지되는 버프 부여,'
+      - '&f버프가 유지되는 동안 공격데미지 &a<value>%&f 상승'
       - ''
-      - '&f레벨당 &a<level_per_value>%&f 데미지 상승'
+      - '&f레벨당 &a+<level_per_value>%'
       - '&f쿨타임: &a<cooldown> s'
       - '&f필요 마나: &3<mana>'
       - '&f최대 레밸: &a<max_level>'
@@ -88,16 +54,16 @@ Spell:
   MagicMissile:
     DisplayName: "매직 미사일"
     MythicSkill: "MagicMissile"
-    CoolDown: 6
-    Value: 50
+    CoolDown: 7
+    Value: 70
     MaxLevel: 4
-    LevelPerValue: 5
+    LevelPerValue: 10
     RequiredKillPoint: 5
     Mana: 5
     Lore:
-      - '&f시전시 바라보는 방향으로 공격 데미지의 &a<value>%&f 의 매직 미사일을 발사한다'
+      - '&f시전시 바라보는 방향으로 공격데미지의 &a<value>%&f 의 매직 미사일을 발사한다'
       - ''
-      - '&f레벨당 &a<level_per_value>%&f 데미지 상승'
+      - '&f레벨당 &a+<level_per_value>%&f'
       - '&f쿨타임: &a<cooldown> s'
       - '&f필요 마나: &3<mana>'
       - '&f최대 레밸: &a<max_level>'
@@ -105,18 +71,36 @@ Spell:
   ArmorAura:
     DisplayName: "방어 오라"
     MythicSkill:
-    CoolDown: 20
-    Value: 10
+    CoolDown: 45
+    Value: 5
     MaxLevel: 4
     LevelPerValue: 5
-    RequiredKillPoint: 6
-    Mana: 12
+    RequiredKillPoint: 7
+    Mana: 15
     Lore:
-      - '&f시전시 5초간 유지되는 버프 부여,'
+      - '&f시전시 20초간 유지되는 버프 부여,'
       - '&f버프가 유지되는 동안 받는 데미지 &a<value>%&f 감소'
       - ''
-      - '&f레벨당 &a<level_per_value>%&f 받는 데미지 감소'
+      - '&f레벨당 &a+<level_per_value>%'
       - '&f쿨타임: &a<cooldown> s'
       - '&f필요 마나: &3<mana>'
       - '&f최대 레밸: &a<max_level>'
       - '&f레벨당 필요 킬 포인트: &a<required_killpoint>'
+  TrackingMagicMissile:
+    DisplayName: "추적 매직 미사일"
+    MythicSkill: "TrackingMagicMissile"
+    CoolDown: 12
+    Value: 50
+    MaxLevel: 4
+    LevelPerValue: 5
+    RequiredKillPoint: 9
+    Mana: 10
+    Lore:
+      - '&f시전시 공격데미지의 &a<value>%&f 의 주변의 3마리의 적을 추적하는 매직 미사일을 발사한다'
+      - ''
+      - '&f레벨당 &a+<level_per_value>%&f'
+      - '&f쿨타임: &a<cooldown> s'
+      - '&f필요 마나: &3<mana>'
+      - '&f최대 레밸: &a<max_level>'
+      - '&f레벨당 필요 킬 포인트: &a<required_killpoint>'
+

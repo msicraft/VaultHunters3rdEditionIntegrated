@@ -2,7 +2,9 @@ package me.msicraft.vaulthuntersintegrated.aCommon.KillPoint;
 
 import me.msicraft.vaulthuntersintegrated.VaultHuntersIntegrated;
 import me.msicraft.vaulthuntersintegrated.aCommon.PlayerData.PlayerDataUtil;
-import org.bukkit.*;
+import org.bukkit.ChatColor;
+import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
@@ -61,12 +63,13 @@ public class KillPointShopUtil {
         return a;
     }
 
-    public static List<String> getLoreList(String name) {
+    public static List<String> getLoreList(String name, Player player) {
         List<String> list = new ArrayList<>();
         if (VaultHuntersIntegrated.getPlugin().getConfig().contains("KillPointShop." + name + ".Lore")) {
             List<String> temp = VaultHuntersIntegrated.getPlugin().getConfig().getStringList("KillPointShop." + name + ".Lore");
             for (String s : temp) {
                 s = s.replaceAll("<requiredKillPoint>", String.valueOf(getRequiredKillPoint(name)));
+                s = s.replaceAll("<lastDeathLocation>", String.valueOf(PlayerDataUtil.getPlayerData(player).getLastDeathLocationToString()));
                 list.add(ChatColor.translateAlternateColorCodes('&', s));
             }
         }
@@ -76,19 +79,31 @@ public class KillPointShopUtil {
     public static Location getSpawnLocation() {
         Location location = null;
         if (VaultHuntersIntegrated.getPlugin().getConfig().contains("SpawnLocation")) {
+            location = VaultHuntersIntegrated.getPlugin().getConfig().getLocation("SpawnLocation");
+            /*
             String s = VaultHuntersIntegrated.getPlugin().getConfig().getString("SpawnLocation");
             if (s != null) {
                 String[] a = s.split(":");
-                World world = Bukkit.getWorld(a[0]);
+                String namespace = a[0];
+                String key = a[1];
+                World world = null;
+                for (World w : Bukkit.getWorlds()) {
+                    NamespacedKey namespacedKey = w.getKey();
+                    if (namespacedKey.getNamespace().equals(namespace) && namespacedKey.getKey().equals(key)) {
+                        world = w;
+                        break;
+                    }
+                }
                 if (world != null) {
-                    double x = Double.parseDouble(a[1]);
-                    double y = Double.parseDouble(a[2]);
-                    double z = Double.parseDouble(a[3]);
-                    float yaw = Float.parseFloat(a[4]);
-                    float pitch = Float.parseFloat(a[5]);
+                    double x = Double.parseDouble(a[2]);
+                    double y = Double.parseDouble(a[3]);
+                    double z = Double.parseDouble(a[4]);
+                    float yaw = Float.parseFloat(a[5]);
+                    float pitch = Float.parseFloat(a[6]);
                     location = new Location(world, x, y, z, yaw, pitch);
                 }
             }
+             */
         }
         return location;
     }

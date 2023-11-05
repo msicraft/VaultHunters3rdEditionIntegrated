@@ -7,10 +7,14 @@ public class Buff {
     private final int seconds;
     private final long endTime;
 
-    public Buff(SpellAbility spellAbility, int seconds) {
+    public Buff(SpellAbility spellAbility, int seconds, String buffName) {
         this.spellAbility = spellAbility;
-        this.buffName = spellAbility.getDisplayName();
-        if (buffName == null) {
+        if (buffName != null) {
+            this.buffName = buffName;
+        } else {
+            this.buffName = spellAbility.getDisplayName();
+        }
+        if (this.buffName == null) {
             this.buffName = "Unknown";
         }
         this.seconds = seconds;

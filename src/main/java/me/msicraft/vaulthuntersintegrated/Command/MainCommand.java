@@ -6,6 +6,7 @@ import me.msicraft.vaulthuntersintegrated.aCommon.MainMenu.MainGui;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -28,8 +29,6 @@ public class MainCommand implements CommandExecutor {
                     switch (var) {
                         case "test" -> {
                             if (sender instanceof Player player) {
-                                player.sendMessage("test: " + player.getWorld() + " | " + player.getWorld().getName());
-                                player.sendMessage("test2: " + player.getWorld().getKey());
                             }
                         }
                         case "help" -> {
@@ -82,11 +81,12 @@ public class MainCommand implements CommandExecutor {
                                         }
                                     } catch (ArrayIndexOutOfBoundsException e) {
                                         Location location = player.getLocation();
-                                        String s = player.getWorld().getName() + ":" + location.getX() + ":" + location.getY() + ":" + location.getZ() + ":" + location.getYaw() + ":" + location.getPitch();
-                                        VaultHuntersIntegrated.getPlugin().getConfig().set("SpawnLocation", s);
+                                        NamespacedKey namespacedKey = player.getWorld().getKey();
+                                        //String s = namespacedKey.getNamespace() + ":" + namespacedKey.getKey() + ":" + location.getX() + ":" + location.getY() + ":" + location.getZ() + ":" + location.getYaw() + ":" + location.getPitch();
+                                        VaultHuntersIntegrated.getPlugin().getConfig().set("SpawnLocation", location);
                                         VaultHuntersIntegrated.getPlugin().saveConfig();
                                         player.sendMessage(ChatColor.GREEN + "스폰 위치가 변경되었습니다.");
-                                        player.sendMessage(ChatColor.GREEN + "월드: " + player.getWorld().getName());
+                                        player.sendMessage(ChatColor.GREEN + "월드: " + player.getWorld().getName() + " | NamespacedKey: " + namespacedKey);
                                         player.sendMessage(ChatColor.GREEN + "X: " + location.getX() + " | Y: " + location.getY() + " | Z: " + location.getZ());
                                         player.getWorld().setSpawnLocation(location);
                                     }

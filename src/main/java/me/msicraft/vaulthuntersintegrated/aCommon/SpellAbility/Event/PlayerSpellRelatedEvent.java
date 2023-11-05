@@ -29,13 +29,15 @@ public class PlayerSpellRelatedEvent implements Listener {
         castingDelay = VaultHuntersIntegrated.getPlugin().getConfig().contains("SpellAbility.CastingDelay") ? VaultHuntersIntegrated.getPlugin().getConfig().getDouble("SpellAbility.CastingDelay") : 0;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onChangeCastingMode(PlayerSwapHandItemsEvent e) {
         Player player = e.getPlayer();
         if (player.isSneaking()) {
-            e.setCancelled(true);
             PlayerSpellAbility playerSpellAbility = PlayerDataUtil.getPlayerData(player).getPlayerSpellAbility();
-            playerSpellAbility.setCastingMode(!playerSpellAbility.isCastingMode());
+            if (playerSpellAbility.getSpellCount() >= 1) {
+                e.setCancelled(true);
+                playerSpellAbility.setCastingMode(!playerSpellAbility.isCastingMode());
+            }
         }
     }
 

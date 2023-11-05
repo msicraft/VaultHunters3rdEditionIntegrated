@@ -107,6 +107,10 @@ public class PlayerData {
         return lastDeathLocation;
     }
 
+    public String getLastDeathLocationToString() {
+        return lastDeathLocation.getWorld().getKey().getKey() + " | X:" + lastDeathLocation.getBlockX() + " | Y:" + lastDeathLocation.getBlockY() + " | Z:" + lastDeathLocation.getBlockZ();
+    }
+
     public void setLastDeathLocation(Location location) {
         this.lastDeathLocation = location;
     }

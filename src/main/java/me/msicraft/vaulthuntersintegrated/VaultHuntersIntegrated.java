@@ -4,6 +4,7 @@ import me.msicraft.vaulthuntersintegrated.Command.MainCommand;
 import me.msicraft.vaulthuntersintegrated.Command.MainTabComplete;
 import me.msicraft.vaulthuntersintegrated.Event.PlayerJoinAndQuit;
 import me.msicraft.vaulthuntersintegrated.Event.PlayerRelatedEvent;
+import me.msicraft.vaulthuntersintegrated.Event.TheVaultRelatedEvent;
 import me.msicraft.vaulthuntersintegrated.Event.WorldRelatedEvent;
 import me.msicraft.vaulthuntersintegrated.aCommon.KillPoint.Event.PlayerKillPointRelatedEvent;
 import me.msicraft.vaulthuntersintegrated.aCommon.KillPoint.KillPointUtil;
@@ -125,6 +126,7 @@ public final class VaultHuntersIntegrated extends JavaPlugin {
         pluginManager.registerEvents(new MainMenuEvent(), this);
         pluginManager.registerEvents(new MainMenuChatEditEvent(), this);
         pluginManager.registerEvents(new PlayerSpellRelatedEvent(), this);
+        pluginManager.registerEvents(new TheVaultRelatedEvent(), this);
     }
 
     private void commandsRegister() {
@@ -144,6 +146,7 @@ public final class VaultHuntersIntegrated extends JavaPlugin {
         PlayerRelatedEvent.reloadVariables();
         WorldRelatedEvent.reloadVariables();
         PlayerSpellRelatedEvent.reloadVariables();
+        TheVaultRelatedEvent.reloadVariables();
         isDebug = getPlugin().getConfig().contains("Debug") && getPlugin().getConfig().getBoolean("Debug");
         isEnabledGlowing = getPlugin().getConfig().contains("Setting.Glowing.Enabled") && getPlugin().getConfig().getBoolean("Setting.Glowing.Enabled");
         String glowTeamColorName = getPlugin().getConfig().contains("Setting.Glowing.Color") ? getPlugin().getConfig().getString("Setting.Glowing.Color") : "WHITE";

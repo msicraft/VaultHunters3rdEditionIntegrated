@@ -42,7 +42,9 @@ public class PlayerSpellAbility {
                 long lastUseTime = playerDataFile.getConfig().getLong("SpellAbility.Bind." + a + ".LastUseTime");
                 SpellAbility spellAbility = SpellAbilityUtil.getSpellAbility(spellKey);
                 bindSpellAbilityMap.put(a, spellAbility);
-                spellAbilityCoolDownMap.put(spellAbility, lastUseTime);
+                if (spellAbility != null) {
+                    spellAbilityCoolDownMap.put(spellAbility, lastUseTime);
+                }
             } else {
                 bindSpellAbilityMap.put(a, null);
             }
@@ -105,6 +107,10 @@ public class PlayerSpellAbility {
         return purchasedSpellAbilityMap;
     }
 
+    public int getSpellCount() {
+        return purchasedSpellAbilityMap.size();
+    }
+
     public void setCastingMode(boolean castingMode) {
         isCastingMode = castingMode;
     }
@@ -136,8 +142,8 @@ public class PlayerSpellAbility {
         return buffMap.containsKey(spellAbility);
     }
 
-    public void addBuff(SpellAbility spellAbility, int seconds) {
-        buffMap.put(spellAbility, new Buff(spellAbility, seconds));
+    public void addBuff(SpellAbility spellAbility, int seconds, String buffName) {
+        buffMap.put(spellAbility, new Buff(spellAbility, seconds, buffName));
     }
 
     public void removeBuff(SpellAbility spellAbility) {

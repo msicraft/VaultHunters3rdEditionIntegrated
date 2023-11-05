@@ -108,7 +108,9 @@ public class GlowUtil {
             }
             if (name != null) {
                 team.addEntry(name);
-                entity.setGlowing(true);
+                if (!entity.isGlowing()) {
+                    entity.setGlowing(true);
+                }
             }
         }
     }
@@ -125,7 +127,9 @@ public class GlowUtil {
                 name = entity.getUniqueId().toString();
             }
             team.addEntry(name);
-            entity.setGlowing(true);
+            if (!entity.isGlowing()) {
+                entity.setGlowing(true);
+            }
             new BukkitRunnable() {
                 @Override
                 public void run() {
@@ -147,7 +151,9 @@ public class GlowUtil {
                 name = entity.getUniqueId().toString();
             }
             if (team.hasEntry(name)) {
-                entity.setGlowing(false);
+                if (entity.isGlowing()) {
+                    entity.setGlowing(false);
+                }
                 team.removeEntry(name);
             }
         }

@@ -5,7 +5,6 @@ import me.msicraft.vaulthuntersintegrated.VaultHuntersIntegrated;
 import me.msicraft.vaulthuntersintegrated.aCommon.PlayerData.PlayerDataUtil;
 import me.msicraft.vaulthuntersintegrated.aCommon.SpellAbility.PlayerSpellAbility;
 import me.msicraft.vaulthuntersintegrated.aCommon.SpellAbility.SpellAbility;
-import me.msicraft.vaulthuntersintegrated.aCommon.SpellAbility.Task.DotHealTask;
 import me.msicraft.vaulthuntersintegrated.aCommon.Util.EntityUtil;
 import org.bukkit.entity.Player;
 
@@ -16,9 +15,13 @@ import java.util.Map;
 public class SpellAbilityUtil {
 
     public static boolean isEnabled = false;
+    public static boolean isDisplayBuffOnTabList = false;
+    public static int buffOnTablistPerLine = 4;
 
     public static void reloadVariables() {
         isEnabled = VaultHuntersIntegrated.getPlugin().getConfig().contains("SpellAbility.Enabled") && VaultHuntersIntegrated.getPlugin().getConfig().getBoolean("SpellAbility.Enabled");
+        isDisplayBuffOnTabList = VaultHuntersIntegrated.getPlugin().getConfig().contains("SpellAbility.BuffDisplayTablist.Enabled") && VaultHuntersIntegrated.getPlugin().getConfig().getBoolean("SpellAbility.BuffDisplayTablist.Enabled");
+        buffOnTablistPerLine = VaultHuntersIntegrated.getPlugin().getConfig().contains("SpellAbility.BuffDisplayTablist.PerLine") ? VaultHuntersIntegrated.getPlugin().getConfig().getInt("SpellAbility.BuffDisplayTablist.PerLine") : 4;
         update();
     }
 
@@ -88,21 +91,14 @@ public class SpellAbilityUtil {
             double calValue = value + (levelPerValue * level);
             switch (spellAbility) {
                 case SELF_HEAL -> EntityUtil.healLivingEntity(player, calValue);
-                case DOT_HEAL -> new DotHealTask(player, calValue, 200).runTaskTimer(VaultHuntersIntegrated.getPlugin(), 0L, 20L);
                 case RANGE_HEAL -> {
                     List<Player> playerList = EntityUtil.getNearPlayer(player, 10, true);
                     for (Player p : playerList) {
                         EntityUtil.healLivingEntity(p, calValue);
                     }
                 }
-                case RANGE_DOT_HEAL -> {
-                    List<Player> playerList = EntityUtil.getNearPlayer(player, 10, true);
-                    for (Player p : playerList) {
-                        new DotHealTask(p, calValue, 200).runTaskTimer(VaultHuntersIntegrated.getPlugin(), 0L, 20L);
-                    }
-                }
-                case ATTACK_AURA -> playerSpellAbility.addBuff(spellAbility, 5);
-                case ARMOR_AURA -> playerSpellAbility.addBuff(spellAbility, 5);
+                case ATTACK_AURA -> playerSpellAbility.addBuff(spellAbility, 25, null);
+                case ARMOR_AURA -> playerSpellAbility.addBuff(spellAbility, 20, null);
             }
         }
     }

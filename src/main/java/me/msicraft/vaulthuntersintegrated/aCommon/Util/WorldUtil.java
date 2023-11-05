@@ -4,6 +4,8 @@ import org.bukkit.World;
 
 public class WorldUtil {
 
+    public static final String THE_VAULT_NAMESPACE_NAME = "the_vault";
+
     public static String getWorldTimeTo24Format(long gameTime) {
         long hours = gameTime / 1000 + 6;
         long minutes = (gameTime % 1000) * 60 / 1000;
@@ -37,7 +39,7 @@ public class WorldUtil {
                     return "End";
                 }
             }
-            if (world.getKey().getNamespace().equals("the_vault")) {
+            if (world.getKey().getNamespace().equals(THE_VAULT_NAMESPACE_NAME)) {
                 return "Vault";
             }
         } else {

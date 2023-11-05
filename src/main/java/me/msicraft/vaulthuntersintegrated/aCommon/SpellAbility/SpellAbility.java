@@ -10,13 +10,12 @@ public enum SpellAbility {
 
     MAGIC_MISSILE("MagicMissile", "매직 미사일", true, "MagicMissile",
             1, 9999, 0, 0, 9999, 9999),
+    TRACKING_MAGIC_MISSILE("TrackingMagicMissile", "추적 매직 미사일", true, "TrackingMagicMissile",
+            1, 9999, 0, 0, 9999, 9999),
+
     SELF_HEAL("SelfHeal" ,"힐", false, null,
             1, 9999, 0, 0, 9999, 9999),
-    DOT_HEAL("DotHeal", "도트 힐", false, null,
-            1, 9999, 0, 0, 9999, 9999),
     RANGE_HEAL("RangeHeal", "범위 힐", false, null,
-            1, 9999, 0, 0, 9999, 9999),
-    RANGE_DOT_HEAL("RangeDotHeal", "범위 도트 힐", false, null,
             1, 9999, 0, 0, 9999, 9999),
     ATTACK_AURA("AttackAura", "공격 오라", false, null,
             1, 9999, 0, 0, 9999, 9999),

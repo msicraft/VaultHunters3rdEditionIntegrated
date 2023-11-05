@@ -60,7 +60,7 @@ public class MainGui implements InventoryHolder {
                 int slot = SLOTS[guiCount];
                 Material material = KillPointShopUtil.getMaterial(s);
                 String name = KillPointShopUtil.getName(s);
-                List<String> lore = KillPointShopUtil.getLoreList(s);
+                List<String> lore = KillPointShopUtil.getLoreList(s, player);
                 itemStack = GuiUtil.createNormalItem(material, name, lore, tag, s);
                 gui.setItem(slot, itemStack);
                 guiCount++;

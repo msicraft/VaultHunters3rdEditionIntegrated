@@ -3,6 +3,7 @@ package me.msicraft.vaulthuntersintegrated.Event;
 import me.msicraft.vaulthuntersintegrated.VaultHuntersIntegrated;
 import me.msicraft.vaulthuntersintegrated.aCommon.PlayerData.PlayerDataUtil;
 import me.msicraft.vaulthuntersintegrated.aCommon.Util.EntityUtil;
+import me.msicraft.vaulthuntersintegrated.aCommon.Util.WorldUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -33,7 +34,6 @@ public class PlayerRelatedEvent implements Listener {
     private static final List<EntityDamageEvent.DamageCause> disableDamageCauses = new ArrayList<>();
     private static boolean useInventoryTotem = false;
     private static int totemInvulnerableTick = 1;
-    private static boolean disableTeleportInVault = false;
 
     public static void reloadVariables() {
         disableMount = VaultHuntersIntegrated.getPlugin().getConfig().contains("Setting.Disable-Mount") && VaultHuntersIntegrated.getPlugin().getConfig().getBoolean("Setting.Disable-Mount");
@@ -51,7 +51,6 @@ public class PlayerRelatedEvent implements Listener {
         }
         useInventoryTotem = VaultHuntersIntegrated.getPlugin().getConfig().contains("Setting.UseInventoryTotem.Enabled") && VaultHuntersIntegrated.getPlugin().getConfig().getBoolean("Setting.UseInventoryTotem.Enabled");
         totemInvulnerableTick = VaultHuntersIntegrated.getPlugin().getConfig().contains("Setting.UseInventoryTotem.InvulnerableTick") ? VaultHuntersIntegrated.getPlugin().getConfig().getInt("Setting.UseInventoryTotem.InvulnerableTick") : 1;
-        disableTeleportInVault = VaultHuntersIntegrated.getPlugin().getConfig().contains("KillPointShop.BackDeathLocation.DisableTeleportInVault") && VaultHuntersIntegrated.getPlugin().getConfig().getBoolean("KillPointShop.BackDeathLocation.DisableTeleportInVault");
     }
 
     @EventHandler
@@ -127,13 +126,9 @@ public class PlayerRelatedEvent implements Listener {
         LivingEntity livingEntity = e.getEntity();
         if (livingEntity instanceof Player player) {
             Location location = player.getLocation();
-            if (disableTeleportInVault) {
-                World world = location.getWorld();
-                if (world != null) {
-                    if (world.getKey().getNamespace().equals("the_vault")) {
-                        return;
-                    }
-                }
+            World world = location.getWorld();
+            if (world != null && world.getKey().getNamespace().equals(WorldUtil.THE_VAULT_NAMESPACE_NAME)) {
+                return;
             }
             PlayerDataUtil.getPlayerData(player).setLastDeathLocation(location);
         }
